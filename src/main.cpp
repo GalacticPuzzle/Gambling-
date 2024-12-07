@@ -51,15 +51,14 @@ void competition_initialize() {}
  * from where it left off.
  */
 void autonomous() {
-    chassis.calibrate();
     chassis.setPose(-58.89, -22.7, 180);
     intakeAuton(-10000);
     mogoMech.set_value(false);
     pros::lcd::print(0, "done");
     chassis.turnToHeading(90, 23000);
-    pros::delay(500); // Add small delay between movements
+    chassis.waitUntilDone();
     chassis.moveToPoint(-19.3, -23.7, 2500, {.forwards = false, .maxSpeed = 100}, true);
-    pros::delay(1000);
+    chassis.waitUntilDone();
 }
 
 /**
