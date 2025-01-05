@@ -8,7 +8,9 @@
 pros::MotorGroup left_motor_group({-14, 15, -16}, pros::MotorGears::blue);
 // right motor group
 pros::MotorGroup right_motor_group({13, -11, 12}, pros::MotorGears::blue);
-pros::Motor IntakeMotor(20, pros::v5::MotorGears::blue); 
+pros::Motor ConveyorMotor(20, pros::v5::MotorGears::blue); 
+pros::Motor IntakeMotor(19, pros::v5::MotorGears::green); 
+
 
 
 // drivetrain settings
@@ -34,21 +36,21 @@ lemlib::OdomSensors sensors(nullptr, // vertical tracking wheel 1, set to null
 );
 
 // lateral PID controller
-lemlib::ControllerSettings lateral_controller(10, // proportional gain (kP)
+lemlib::ControllerSettings lateral_controller(40, // proportional gain (kP)
                                               0, // integral gain (kI)
-                                              3, // derivative gain (kD)
-                                              3, // anti windup
-                                              1, // small error range, in inches
-                                              100, // small error range timeout, in milliseconds
-                                              3, // large error range, in inches
-                                              500, // large error range timeout, in milliseconds
+                                              250, // derivative gain (kD)
+                                              0, // anti windup
+                                              0, // small error range, in inches
+                                              0, // small error range timeout, in milliseconds
+                                              0, // large error range, in inches
+                                              0, // large error range timeout, in milliseconds
                                               20 // maximum acceleration (slew)
 );
 
 // angular PID controller
-lemlib::ControllerSettings angular_controller(2, // proportional gain (kP)
+lemlib::ControllerSettings angular_controller(4, // proportional gain (kP)
                                               0, // integral gain (kI)
-                                              10, // derivative gain (kD)
+                                              35, // derivative gain    (kD)
                                               3, // anti windup
                                               1, // small error range, in inches
                                               100, // small error range timeout, in milliseconds

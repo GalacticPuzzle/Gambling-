@@ -37,7 +37,20 @@ void disabled() {}
  * This task will exit when the robot is enabled and autonomous or opcontrol
  * starts.
  */
-void competition_initialize() {}
+void competition_initialize() {
+
+     pros::Task screen_task([&]() {
+        while (true) {
+            // Combine position data onto one line
+            pros::lcd::print(1, "X:%.1f Y:%.1f T:%.1f", 
+                           chassis.getPose().x,
+                           chassis.getPose().y,
+                           chassis.getPose().theta);
+        
+            pros::delay(20);
+        }
+    });
+}
 
 /**
  * Runs the user autonomous code. This function will be started in its own task
@@ -51,14 +64,49 @@ void competition_initialize() {}
  * from where it left off.
  */
 void autonomous() {
-    chassis.setPose(-58.89, -22.7, 180);
-    intakeAuton(-10000);
-    mogoMech.set_value(false);
-    pros::lcd::print(0, "done");
-    chassis.turnToHeading(90, 23000);
-    chassis.waitUntilDone();
-    chassis.moveToPoint(-19.3, -23.7, 2500, {.forwards = false, .maxSpeed = 100}, true);
-    chassis.waitUntilDone();
+    // chassis.setPose(-0, 0, 0);
+    // chassis.moveToPoint(-2, -40, 2500, {.forwards = false, .maxSpeed = 70}, true);
+    // pros::delay(1100); 
+
+    // mogoMech.set_value(true);
+
+    // chassis.waitUntil(15);
+    // mogoMech.set_value(true);
+    // chassis.waitUntilDone();
+
+    // intakeAuton(-100000);
+    // pros::delay(2000); 
+
+    // chassis.turnToHeading(-75, 25000);
+    // chassis.waitUntilDone();
+
+
+
+//******************  ***************SKILLLLLSSS PROGGGGGGG *********************************************
+chassis.setPose(0,0,0);
+mogoMech.set_value(false);
+chassis.moveToPoint(-0.2, -5.7, 1000,{.forwards = false, .maxSpeed = 60}, true);
+pros::delay(500);
+intakeAuton(-12000);
+pros::lcd::print(1,"37, suzie, chhibber");
+chassis.moveToPoint(0.3, -14.6, 25000, {.forwards = false, .maxSpeed = 50}, false);
+chassis.turnToPoint(37.9, 13.3, 25000);
+
+
+
+
+
+
+
+
+
+
+    //chassis.moveToPoint(-24.2, -34    .9, 25000,{.forwards = true, .maxSpeed = 80}, false);
+    
+    // mogoMech.set_value(false);
+    // pros::lcd::print(0, "done");
+    // chassis.turnToHeading(90, 23000);
+    // chassis.waitUntilDone();
 }
 
 /**
@@ -78,6 +126,10 @@ pros::Controller controller(pros::E_CONTROLLER_MASTER);
 
 void opcontrol() {
 while (true) {
+    //pros::lcd::print(1, "X:%.1f Y:%.1f T:%.1f", 
+                           //chassis.getPose().x,
+                           //chassis.getPose().y,
+                           //chassis.getPose().theta);
     tankDrive();
     Intakerun();
     grab();
